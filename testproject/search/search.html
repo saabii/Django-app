@@ -1,0 +1,19 @@
+{% extends 'more/mixes.html' %}
+{% load bootstrap3 %}
+{% block page %}
+    <h1>Поиск</h1>
+    {% if podcast_lists %}
+        {% for podcast in podcast_lists %}
+            <<article>>
+                <a href="{{ podcast.get_absolute_url }}">
+                    <h2>{{ podcast.podcast_title }}</h2>
+                </a>
+                {{ podcast.desctription|safe }}
+                <p><a class="btn btn-default btn-sm" href="{{ podcast.get_absolute_url }}">Узнать больше</a></p>
+            </article>>
+        {% endfor %}
+        {% bootstrap_pagination podcast_lists url=last_question %}
+    {% else %}
+        <p>Не найдено публикаций по вашему запросу<br>Попробуйте повторить запрос с другой формулировкой</p>
+    {% endif %}
+{% endblock %}
